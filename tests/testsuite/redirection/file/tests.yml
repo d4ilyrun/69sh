@@ -1,0 +1,46 @@
+# TODO: chek file content
+- name: simple_echo
+  stdin: echo "Hello, World!" > output.txt
+  file: output.txt
+  checks:
+    - file
+    - stdout
+    - returncode
+
+- name: append
+  stdin: echo "FIRST LINE" >> output.txt
+  file: output.txt
+  checks:
+    - file
+    - stdout
+    - returncode
+
+- name: write_file
+  stdin: echo "FIRST LINE" > output.txt
+  file: output.txt
+  checks:
+    - file
+    - stdout
+    - returncode
+
+- name: file_stdin
+  stdin: while read line; do echo $line; done < tests.yml
+
+- name: file_stdin_error
+  stdin: while read line; do echo $line; done < tests_not_here.yml
+
+- name: stderr
+  stdin: echo "Hello, World!" &>2
+
+- name: /dev/null
+  stdin: echo "Shouldn't be printed" > /dev/null
+
+  # FIXME: May be invalid
+- name: double_std_redirection
+  stdin: echo "[ERROR]" &>2 2&> output.txt
+  file: output.txt
+  checks:
+    - file
+    - stdout
+    - stderr
+    - returncode

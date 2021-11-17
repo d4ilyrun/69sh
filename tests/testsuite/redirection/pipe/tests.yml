@@ -1,5 +1,29 @@
-- name: ls_simple2
-  stdin: ls
+- name: echo simple
+  stdin: echo -e "Hello, World!\n" | cat -e
+  checks:
+    - stdout
+    - returncode
 
-- name: ls_with_sla2
-  stdin: ls -sla
+- name: true_false
+  stdin: true | false
+  checks:
+    - stdout
+    - returncode
+
+- name: false_true
+  stdin: false | true
+  checks:
+    - stdout
+    - returncode
+
+- name: hard_grep
+  stdin: echo "ACDC 4 LIFE" | grep -oh "ACDC" | xargs echo "Nous sommes les" 
+  checks:
+    - stdout
+    - returncode
+
+- name: empty
+  stdin: echo "ACDC 4 LIFE" | grep -oh "ASM" | xargs echo "Berk" 
+  checks:
+    - stdout
+    - returncode
