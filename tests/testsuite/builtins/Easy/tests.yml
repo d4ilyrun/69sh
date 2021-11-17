@@ -1,5 +1,53 @@
 - name: ls_simple
   stdin: ls
 
-- name: ls_with_sla
-  stdin: ls -sla
+- name: exit_simple
+  stdin: exit
+
+- name: cd_simple
+  stdin: cd
+
+- name: cd_simple2
+  stdin: cd ..
+
+- name: export_simple
+  stdin: export NAME=VALUE
+
+- name: export_simple2
+  stdin: echo $NAME
+
+- name: echo_simple
+  stdin: echo coucou
+
+- name: echo_simple2
+  stdin: echo coucou et coucou ou coucocu
+
+- name: echo_simple3
+  stdin: echo foo; echo bar
+
+- name: echo_simple3
+  stdin: echo foo; echo bar;
+
+- name: cat_simple
+  stdin: cat run.py
+
+- name: $@
+  stdin: echo $@
+
+- name: $*
+  stdin: echo $*
+
+- name: $?
+  stdin: echo $?
+
+- name: $1
+  stdin: echo $1
+
+- name: $UID
+  stdin: echo $UID
+
+- name: $OLDPWD
+  stdin: echo $OLDPWD
+
+
+

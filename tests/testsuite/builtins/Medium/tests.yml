@@ -1,5 +1,39 @@
-- name: ls_simple2
-  stdin: ls
+- name: if_simple
+  stdin:  if echo ok ; then echo toto ; fi
 
-- name: ls_with_sla2
-  stdin: ls -sla
+- name: if_simple
+  stdin:  if false ; then echo toto ; fi
+
+- name: if_else_simple
+  stdin:  if false ; then echo toto ; else echo et on ; fi
+
+- name: if_else_simple
+  stdin:  if true ; then echo toto ; else echo et on ; fi
+
+- name:  elif_simple
+  stdin: if false ; then echo toto ; elif false ; then echo on ; else echo et on ; fi
+
+- name: echo_simple
+  stdin: if false ; then echo toto ; elif true ; then echo on ; else echo et on ; fi
+
+- name: if_simple_neg
+  stdin:  if ! echo ok ; then echo toto ; fi
+
+- name: if_simple_neg
+  stdin:  if false ; then echo toto ; fi
+
+- name: if_else_simple_neg
+  stdin:  if false ; then ! echo toto ; else echo et on ; fi
+
+- name: if_else_simple_neg
+  stdin:  if ! true ; then echo toto ; else echo et on ; fi
+
+- name: elif_simple_neg
+  stdin: if false ; then echo toto ; elif ! false ; then echo on ; else echo et on ; fi
+
+- name: echo_simple_neg
+  stdin: if false ; then echo toto ; elif ! true ; then echo on ; else echo et on ; fi
+
+- name: if_exit
+  stdin: if false; true; then echo a; echo b; exit ; fi
+

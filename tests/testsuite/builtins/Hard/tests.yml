@@ -1,10 +1,2 @@
-- name: ls_simplesldf
-  stdin: ls
-  checks:
-    - stderr
-    - stdout
-    - has_stderr
-    - returncode
-
-- name: cat
-  stdin: cat
+- name: if_redirection
+  stdin: if echo ok; then echo foobar > example.txt; fi
