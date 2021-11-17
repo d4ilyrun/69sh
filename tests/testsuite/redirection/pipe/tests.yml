@@ -1,0 +1,5 @@
+- name: ls_simple2
+  stdin: ls
+
+- name: ls_with_sla2
+  stdin: ls -sla
