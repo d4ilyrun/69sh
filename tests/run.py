@@ -26,10 +26,18 @@ def diff(ref,student):
     student = student.splitlines(keepends=True)
     return ''.join(unified_diff(ref,student,fromfile="ref",tofile="student"))
 
-def run_one_test(binary,testcase):
-    ref = run_shell(["bash","--posix"],testcase["stdin"])
-    student = run_shell(binary,testcase["stdin"])
-
+def run_one_test(binary,testcase,dos):
+    #test stdin commande like 'echo toto '
+    if ('stdin' in testcase):
+        ref =  run_shell(["bash","--posix"],testcase["stdin"])
+        student = run_shell(binary,testcase["stdin"])
+    #test a scipt.sh 
+    if ('file' in testcase):
+        ref =  run_shell(["bash","--posix"],dos + "/" + testcase["file"])
+        student = run_shell(binary,dos + "/" + testcase["file"])
+    if (not 'file' in testcase and not 'stdin' in testcase):
+        print(colored("error on" + dos,"red"))
+        return
     for check in testcase.get("checks",["stdout","stderr,returncode","has_stderr"]):
         if check == "stdout":
             assert ref.stdout == student.stdout, \
@@ -43,7 +51,9 @@ def run_one_test(binary,testcase):
         elif check == "has_stderr" and ref.stderr != "":
             assert student.stderr != "", \
                 f"Something was expected on stderr"
+        
 
+        
 def run_yml_test(binary,file_yml,detail):
     nb_test = 0;nb_fail = 0
     pri = []
@@ -51,7 +61,7 @@ def run_yml_test(binary,file_yml,detail):
             content = yaml.safe_load(tests_files)
     for test in content:
         try:
-            run_one_test(binary,test)
+            run_one_test(binary,test,os.path.dirname(file_yml))
         except AssertionError as err:
             nb_fail+= 1
             pri.append(f"[{colored('KO','red')}]" + test["name"] + ('\n' + str(err) if detail else " "))
@@ -61,7 +71,8 @@ def run_yml_test(binary,file_yml,detail):
     name = os.path.dirname(file_yml).split('/')[-2].upper() + ' ' + os.path.dirname(file_yml).split('/')[-1].upper()
     if nb_fail == 0:
         print(f"[{colored('OK','green')}] {name} {nb_test-nb_fail}/{nb_test}")
-        return
+        if not detail:
+            return
     else:
         print(f"[{colored('KO','red')}] {name} {nb_test-nb_fail}/{nb_test}")
     for text in pri:
@@ -77,8 +88,8 @@ if __name__ == "__main__":
     binary = Path(args.bin).absolute()
     
     # TODO:recup la taille du term pour formater le string ;)
-    print("----------TEST-SUITE----------")
+    print(colored("----------TEST-SUITE----------","blue"))
     list_yml = extract_all_yml('testsuite')
     for file_yml in list_yml:
         run_yml_test(binary,file_yml,args.detail)
-    print("------------------------------")
+    print(colored("------------------------------","blue"))

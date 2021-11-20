@@ -1,2 +1,20 @@
 - name: if_redirection
   stdin: if echo ok; then echo foobar > example.txt; fi
+
+- name: if_file
+  file: if_file.sh
+
+- name: if_file2
+  file: if_files2.sh
+
+- name: echo_file
+  file: echo_file.sh
+
+- name: for_file
+  file: for_file.sh
+
+- name: if_var_file
+  file: if_file_var.sh
+
+- name: var_file
+  file: var_file.sh
