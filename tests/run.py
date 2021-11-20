@@ -6,6 +6,7 @@ import yaml
 import subprocess as sp
 import os
 import os.path
+import shutil
 
 # FILE
 def extract_all_yml(dos):
@@ -48,12 +49,12 @@ def run_one_test(binary,testcase,dos):
     if ('file' in testcase):  #test a scipt.sh 
         var_input = dos + "/" + testcase["file"]
     #REF:
-    os.remove('testsuite/sandbox')
+    shutil.rmtree('testsuite/sandbox')
     os.mkdir('testsuite/sandbox')
     ref =  run_shell(["bash","--posix"],var_input)
     snap_ref = snapshot('testsuite/sandbox')
     #STUDENT:
-    os.remove('testsuite/sandbox')
+    shutil.rmtree('testsuite/sandbox')
     os.mkdir('testsuite/sandbox')
     student = run_shell(binary,var_input)
     snap_student = snapshot('testsuite/sandbox')
