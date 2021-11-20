@@ -1,5 +1,5 @@
 - name: if_redirection
-  stdin: if echo ok; then echo foobar > example.txt; fi
+  stdin: if echo ok; then echo foobar > testsuite/sandbox/example.txt; fi
 
 - name: if_file
   file: if_file.sh
