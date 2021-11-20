@@ -1,2 +1,2 @@
-- name: fun_easy
-  file: fun_easy.sh
+- name: fun_med
+  file: fun_med.sh

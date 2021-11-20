@@ -72,12 +72,12 @@ def run_yml_test(binary,file_yml,detail):
     if nb_fail == 0:
         print(f"[{colored('OK','green')}] {name} {nb_test-nb_fail}/{nb_test}")
         if not detail:
-            return
+            return (nb_test,nb_test)
     else:
         print(f"[{colored('KO','red')}] {name} {nb_test-nb_fail}/{nb_test}")
     for text in pri:
         print('    ' + text)
-
+    return (nb_test-nb_fail,nb_test)
 
 # MAIN
 if __name__ == "__main__":
@@ -88,8 +88,12 @@ if __name__ == "__main__":
     binary = Path(args.bin).absolute()
     
     # TODO:recup la taille du term pour formater le string ;)
+    var = (0,0) #(success, total)
     print(colored("----------TEST-SUITE----------","blue"))
     list_yml = extract_all_yml('testsuite')
     for file_yml in list_yml:
-        run_yml_test(binary,file_yml,args.detail)
+        res = run_yml_test(binary,file_yml,args.detail)
+        var = (var[0] + res[0], var[1] + res[1])
+    print(colored("------------------------------","blue"))
+    print(colored("-----------| ","blue") + str(var[0]) + "/" + str(var[1]) + colored(" |----------","blue"))
     print(colored("------------------------------","blue"))

@@ -4,12 +4,6 @@
 - name: exit_simple
   stdin: exit
 
-- name: cd_simple
-  stdin: cd
-
-- name: cd_simple2
-  stdin: cd ..
-
 - name: export_simple
   stdin: export NAME=VALUE
 
