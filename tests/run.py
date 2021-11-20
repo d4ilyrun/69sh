@@ -1,3 +1,13 @@
+#-------------- TEST SUITE for 42sh ---------------#
+# Use .yml file
+# name : the name of the test
+# stdin or file : the input cam be a file or a command line
+# checks : by default he check every output (err,out,return,file)
+#          but you can specify it
+# the "sandbox/" is the place to create file or dir, she is delete every test
+#--------------------------------------------------#
+
+# IMPORT
 from argparse import ArgumentParser
 from pathlib import *
 from difflib import unified_diff
@@ -18,7 +28,7 @@ def extract_all_yml(dos):
                 lis.insert(0,path_file)
     return lis
 
-#SNAPSHOT of the sandbox
+# SNAPSHOT of the sandbox
 def snapshot(dos):
     res = ""
     for root, dirs, files in os.walk(dos):
