@@ -1,2 +1,14 @@
 - name: and_file
   file: and_file.sh
+
+- name: and_easy
+  stdin: echo oui && echo non
+
+- name: and_easy2
+  stdin: echo oui && ls && echo non
+
+- name: and_easy3
+  stdin: echo oui && false && echo non
+
+- name: and_med
+  stdin: echo oui && true && ( echo non && echo allez je veux bien )

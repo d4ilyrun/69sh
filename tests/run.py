@@ -84,7 +84,6 @@ def run_one_test(binary,testcase,dos):
         elif check == "file":
             assert snap_ref == snap_student, \
                 f"exit file except:{snap_ref}, got:{snap_student}\n"
-        #TODO : check environement ;)
 
 def run_yml_test(binary,file_yml,detail):
     nb_test = 0;nb_fail = 0
