@@ -1,0 +1,13 @@
+# Binaries
+*.o
+*.out
+*.a
+*.so
+*.exe
+
+# Compiled
+builddir
+42sh
+
+# Tests
+tests/testsuite/sandbox
