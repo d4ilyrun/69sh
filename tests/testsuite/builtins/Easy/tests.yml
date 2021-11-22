@@ -43,5 +43,14 @@
 - name: $OLDPWD
   stdin: echo $OLDPWD
 
+- name: ls_and_echo
+  stdin: echo wahouuu;   ls
+
+- name: echo_space
+  stdin: echo    eeee    eee e e e e e    ;    echo eetetete               !
+
+- name: ls_option
+  stdin: ls ; ls -sla ; ls -a -sla
+
 
 

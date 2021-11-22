@@ -37,3 +37,12 @@
 - name: if_exit
   stdin: if false; true; then echo a; echo b; exit ; fi
 
+- name: echo_quot
+  stdin: echo 'woooo trop bien'
+
+- name: echo_option
+  stdin: echo -n sans le retour a la ligne 
+
+- name: echo_option2
+  stdin: echo -e mais c'est \n trop bien  wow
+

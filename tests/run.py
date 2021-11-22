@@ -11,7 +11,7 @@
 from argparse import ArgumentParser
 from pathlib import *
 from difflib import unified_diff
-from termcolor import colored
+from termcolor import *
 import yaml
 import subprocess as sp
 import os
@@ -68,6 +68,17 @@ def run_one_test(binary,testcase,dos):
     os.mkdir('testsuite/sandbox')
     student = run_shell(binary,var_input)
     snap_student = snapshot('testsuite/sandbox')
+    #TCHEC PRINT:
+    if ('print' in testcase): #TODO mettre ca dans la focntion du dessous car ca print pas en meme temps que le OK/KO
+        print(f"------ test: {colored(var_input,'magenta')} -----")
+        for prints in testcase.get("print",["stdout","stderr","returncode","ref","file"]):
+            if prints == "stdout":
+                print(f"STUDENT stdout:\n{student.stdout}")
+            if prints == "stderr":
+                print(f"STUDENT stderr:\n{student.stderr}")
+            if prints == "returncode":
+                print(f"STUDENT returncode:\n{student.returncode}")
+        print("------------------------------")
     for check in testcase.get("checks",["stdout","stderr","returncode","has_stderr","file"]):
         if check == "stdout":
             assert ref.stdout == student.stdout, \
