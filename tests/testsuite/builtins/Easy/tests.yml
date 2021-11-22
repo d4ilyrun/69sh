@@ -1,0 +1,56 @@
+- name: ls_simple
+  stdin: ls
+
+- name: exit_simple
+  stdin: exit
+
+- name: export_simple
+  stdin: export NAME=VALUE
+
+- name: export_simple2
+  stdin: echo $NAME
+
+- name: echo_simple
+  stdin: echo coucou
+
+- name: echo_simple2
+  stdin: echo coucou et coucou ou coucocu
+
+- name: echo_simple3
+  stdin: echo foo; echo bar
+
+- name: echo_simple3
+  stdin: echo foo; echo bar;
+
+- name: cat_simple
+  stdin: cat run.py
+
+- name: $@
+  stdin: echo $@
+
+- name: $*
+  stdin: echo $*
+
+- name: $?
+  stdin: echo $?
+
+- name: $1
+  stdin: echo $1
+
+- name: $UID
+  stdin: echo $UID
+
+- name: $OLDPWD
+  stdin: echo $OLDPWD
+
+- name: ls_and_echo
+  stdin: echo wahouuu;   ls
+
+- name: echo_space
+  stdin: echo    eeee    eee e e e e e    ;    echo eetetete               !
+
+- name: ls_option
+  stdin: ls ; ls -sla ; ls -a -sla
+
+
+

@@ -1,0 +1,45 @@
+- name: simple_echo
+  stdin: echo "Hello, World!" > sandbox/output.txt
+  checks:
+    - file
+    - stdout
+    - returncode
+
+- name: append
+  stdin: echo "FIRST LINE" >> sandbox/output.txt
+  checks:
+    - file
+    - stdout
+    - returncode
+
+- name: write_file
+  stdin: echo "FIRST LINE" > testsuite/sandbox/output.txt
+  checks:
+    - file
+    - stdout
+    - returncode
+
+- name: file_stdin
+  stdin: while read line; do echo $line; done < testsuite/redirection/file/tests.yml
+
+- name: file_stdin_error
+  stdin: while read line; do echo $line; done < tests_not_here.yml
+  checks:
+    - has_stderr
+    - returncode
+    - stdiout
+
+- name: stderr
+  stdin: echo "Hello, World!" &>testsuite/sandbox/2
+
+- name: /dev/null
+  stdin: echo "Shouldn't be printed" > /dev/null
+
+  # FIXME: May be invalid
+- name: double_std_redirection
+  stdin: echo "[ERROR]" &>testsuite/sandbox/2 2&> testsuite/sandbox/output.txt
+  checks:
+    - file
+    - stdout
+    - stderr
+    - returncode

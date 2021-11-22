@@ -1,0 +1,14 @@
+- name: or_file
+  file: or_file.sh
+
+- name: or_easy
+  stdin: echo salut || echo ca va
+
+- name: or_easy2
+  stdin: false || echo ca va || echo ca va 2
+
+- name: or_easy3
+  stdin: ( false || false ) || echo bonjour les amis
+
+- name: or_et_and
+  stdin: echo salut && false || ls
